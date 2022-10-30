@@ -1,22 +1,22 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+function createPassword() {
+  var password = buildPassword();
+  var pwText = document.querySelector("#password");
+
+  pwText.value = password;
 
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", createPassword);
 
 // todo: start code below.
 
-function generatePassword() {
-  alert ('Follow the following commands in order to generate your random password.');
+function buildPassword() {
+  alert('Follow the following commands in order to generate your random password.');
 
   // User input for password length and validation for a number between specified values
   var inValid = true;
@@ -27,12 +27,12 @@ function generatePassword() {
     } else if (passwordLength == 0) {
       Window.close()
     } else {
-      alert ('Input invalid. Please try again.');
+      alert('Input invalid. Please try again.');
     }
   }
   alert('You chose the length of your password to be:\n' + passwordLength + ' characters.\n\nYou will now choose if your password will contain numbers, special character, upper case, and lower case characters.\nPlease choose at least 1 option.');
 
-  // Going over which type of charactors they want in their password
+  // filtering which type of characters to have in password
   while (!inValid) {
     var lowerCase = confirm('Would you like your password to include: \nLower Case letters?');
     var upperCase = confirm('Would you like your password to include: \nUpper Case letters?');
@@ -45,7 +45,7 @@ function generatePassword() {
       alert('At least one character type must be selected. Please try again');
     }
   }
-  
+
   // avalible charactors the generator chooses from
   if (lowerCase == true) {
     lowerCase = 'abcdefghijklmnopqrstuvwxyz'
@@ -65,13 +65,13 @@ function generatePassword() {
     special = ''
   }
 
-  // Merges strings of all chosen options
-  var grandString = special.concat(lowerCase, upperCase, numeric);
+  
+  var finalString = special.concat(lowerCase, upperCase, numeric);
 
-  // creates final password by randomizing through each item in the string
-  var randomNumber = '';
+  // randomizes each string to create the password
+  var ranNumber = '';
   for (var i = 0; i < passwordLength; i++) {
-    randomNumber += grandString[Math.floor(Math.random() * grandString.length)];
-  } 
-  return randomNumber;
+    ranNumber += finalString[Math.floor(Math.random() * finalString.length)];
+  }
+  return ranNumber;
 }
